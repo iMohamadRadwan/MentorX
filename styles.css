@@ -2152,7 +2152,7 @@ a:hover {
     }
     
     .hero-content h2 {
-        font-size: 1.79rem;
+        font-size: 1.5rem;
         margin-bottom: 1.8rem;
         line-height: 1.75;
         letter-spacing: -0.2px;
@@ -2224,7 +2224,7 @@ a:hover {
     }
     
     .stat-number {
-        font-size: 1.4rem;
+        font-size: 2rem;
         font-weight: 700;
     }
     
@@ -2708,7 +2708,7 @@ a:hover {
     }
     
     .stat-number {
-        font-size: 1.75rem;
+        font-size: 2.25rem;
         font-weight: 800;
         background: linear-gradient(135deg, var(--primary-color), #fff9c4);
         -webkit-background-clip: text;
