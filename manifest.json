@@ -1,0 +1,18 @@
+{
+  "name": "X Mentor",
+  "short_name": "X Mentor",
+  "description": "برنامج X Mentor يساعدك على بناء حساب احترافي على منصة X وتحويل الجمهور لعملاء فعليين من الخليج والسعودية",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FDDC4F",
+  "icons": [
+    {
+      "src": "images/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "dir": "rtl",
+  "lang": "ar"
+}

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X Mentor - برنامج احترافي لبناء حسابك على منصة X</title>
+    <meta name="description" content="برنامج X Mentor يساعدك على بناء حساب احترافي على منصة X وتحويل الجمهور لعملاء فعليين من الخليج والسعودية">
+    <meta name="keywords" content="X Mentor, تويتر, منصة X, تسويق رقمي, استشارات, تدريب, السعودية, الخليج">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://xmentor.example.com/">
+    <meta property="og:title" content="X Mentor - برنامج احترافي لبناء حسابك على منصة X">
+    <meta property="og:description" content="برنامج X Mentor يساعدك على بناء حساب احترافي على منصة X وتحويل الجمهور لعملاء فعليين من الخليج والسعودية">
+    <meta property="og:image" content="https://xmentor.example.com/images/MentorX.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="X Mentor Logo - برنامج احترافي لبناء حسابك على منصة X">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://xmentor.example.com/">
+    <meta property="twitter:title" content="X Mentor - برنامج احترافي لبناء حسابك على منصة X">
+    <meta property="twitter:description" content="برنامج X Mentor يساعدك على بناء حساب احترافي على منصة X وتحويل الجمهور لعملاء فعليين من الخليج والسعودية">
+    <meta property="twitter:image" content="https://xmentor.example.com/images/MentorX.png">
+    <meta property="twitter:image:alt" content="X Mentor Logo - برنامج احترافي لبناء حسابك على منصة X">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="author" content="X Mentor">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Arabic">
+    <meta name="geo.region" content="SA">
+    <meta name="geo.placename" content="Saudi Arabia">
+    
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#FDDC4F">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "X Mentor - برنامج احترافي لبناء حسابك على منصة X",
+      "description": "برنامج X Mentor يساعدك على بناء حساب احترافي على منصة X وتحويل الجمهور لعملاء فعليين من الخليج والسعودية",
+      "url": "https://xmentor.example.com",
+      "image": "https://xmentor.example.com/images/MentorX.png",
+      "provider": {
+        "@type": "Organization",
+        "name": "X Mentor",
+        "telephone": "+201064854501",
+        "url": "https://xmentor.example.com",
+        "logo": "https://xmentor.example.com/images/MentorX.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+201064854501",
+          "contactType": "customer service",
+          "availableLanguage": ["Arabic", "English"]
+        }
+      },
+      "serviceType": "استشارات تسويق رقمي",
+      "category": "Digital Marketing Training",
+      "offers": {
+        "@type": "Offer",
+        "description": "برنامج تدريبي شامل لبناء حساب احترافي على منصة X",
+        "availability": "https://schema.org/InStock"
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Saudi Arabia"
+        },
+        {
+          "@type": "Place",
+          "name": "Gulf Countries"
+        }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Business professionals, entrepreneurs, trainers"
+      }
+    }
+    </script>
+    <!-- Preloader CSS -->
+    <style>
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        .preloader.fade-out {
+            opacity: 0;
+        }
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader"></div>
+    </div>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <img src="images/MentorX.png" alt="X Mentor" class="logo-img" id="logoImg">
+            </div>
+            <nav class="nav">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="navList">
+                    <li><a href="#" class="active">الرئيسية</a></li>
+                    <li><a href="#about-mentor">عن المدرب</a></li>
+                    <li><a href="#program-details">تفاصيل البرنامج</a></li>
+                    <li><a href="#features">المميزات</a></li>
+                    <li><a href="#stages">مراحل البرنامج</a></li>
+                    <li><a href="#testimonials">النتائج السابقة</a></li>
+                    <li><a href="#contact">احجز الآن</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>برنامج X Mentor</h2>
+                <p>لو بتقدم خدمة أو تدريب أو كورس وعايز تستهدف عملاء من الخليج أو السعودية بالتحديد وتتعامل على منصة فرصها أقوى اضعاف 🚀</p>
+                <div class="cta-buttons">
+                    <a href="https://wa.me/+201064854501" class="btn btn-primary">احجز الآن</a>
+                    <a href="#program-details" class="btn btn-secondary">اعرف المزيد</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/MentorX.png" alt="X Mentor - بناء حساب احترافي على منصة X">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Mentor Section -->
+    <section id="about-mentor" class="about-mentor">
+        <div class="container">
+            <h2 class="section-title">عن المدرب</h2>
+            <div class="mentor-content">
+                <div class="mentor-card">
+                    <div class="mentor-image">
+                        <img src="images/maboelmaged.png" alt="محمود ابو المجد">
+                    </div>
+                    <div class="mentor-info">
+                        <h3>محمود ابو المجد</h3>
+                        <div class="mentor-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">+7</span>
+                                <span class="stat-label">سنوات خبرة</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">+200</span>
+                                <span class="stat-label">متدرب</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">ملايين</span>
+                                <span class="stat-label">المشاهدات</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">آلاف</span>
+                                <span class="stat-label">المتابعين</span>
+                            </div>
+                        </div>
+                        <div class="mentor-description">
+                            <p>خبرة +7 سنوات في صناعة المحتوى والنمو على X</p>
+                            <p>دربت أكتر من 200 شخص على بناء تواجد احترافي على X</p>
+                            <p>حققت ملايين المشاهدات وآلاف المتابعين لعملائي على منصة X</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Details Section -->
+    <section id="program-details" class="course-details">
+        <div class="container">
+            <h2 class="section-title">تفاصيل البرنامج</h2>
+            <div class="course-info">
+                <div class="info-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>المدة</h3>
+                    <p>شهر ونص</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-users"></i>
+                    <h3>لمن البرنامج</h3>
+                    <p>مقدمي الخدمات</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-video"></i>
+                    <h3>الجلسات</h3>
+                    <p>5 ميتينج</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-gift"></i>
+                    <h3>الهدايا</h3>
+                    <p>ملف ٥٠ فكرة</p>
+                </div>
+            </div>
+            <div class="course-description">
+                <h3>كيف سأساعدك</h3>
+                <p>أنا هساعدك توصل لكدة من خلال:</p>
+                <ul class="benefits-list">
+                    <li><i class="fas fa-check"></i> بناء حساب احترافي على منصة X</li>
+                    <li><i class="fas fa-check"></i> وضع استراتيجية المحتوى لبراندك الشخصي على المنصة</li>
+                    <li><i class="fas fa-check"></i> شرح آلية عمل المنصة وخوارزمياتها وأفضل طريقة للنجاح</li>
+                    <li><i class="fas fa-check"></i> تحديد الروتين اليومي اللي يساعدك تحقق آلاف المشاهدات</li>
+                    <li><i class="fas fa-check"></i> مراجعة محتواك وأفكارك قبل النشر لتحقق أهدافك</li>
+                    <li><i class="fas fa-check"></i> بناء funnel لتحويل الجمهور لعملاء فعليين بسهولة</li>
+                </ul>
+            </div>
+            <div class="course-curriculum">
+                <h3>مسؤولياتك في البرنامج</h3>
+                <div class="responsibilities">
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check"></i> تحويل خبرتك لمحتوى من خلال كتابة التغريدات والثريدات</li>
+                        <li><i class="fas fa-check"></i> التفاعل والتعليق مع الحسابات اللي هنحددها في الاستراتيجية</li>
+                        <li><i class="fas fa-check"></i> النشر اليومي في المواعيد المحددة والمتفق عليها</li>
+                        <li><i class="fas fa-check"></i> المتابعة اليومية من خلال الواتساب والالتزام بالمهام</li>
+                    </ul>
+                </div>
+                
+                <h3 class="mt-4">البرنامج مناسب لـ</h3>
+                <div class="target-audience">
+                    <ul class="benefits-list">
+                        <li><i class="fas fa-check"></i> مقدمي الخدمات الفردية</li>
+                        <li><i class="fas fa-check"></i> أصحاب الخبرات واللي بيقدموا استشارات</li>
+                        <li><i class="fas fa-check"></i> المدربين واللي عندهم كورسات أونلاين سعرها عالي</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">مميزات البرنامج</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bullseye"></i>
+                    <h3>استهداف دقيق</h3>
+                    <p>استهداف عملاء من الخليج والسعودية بشكل مباشر وفعال</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>نمو سريع</h3>
+                    <p>تحقيق آلاف المشاهدات وزيادة التفاعل مع المحتوى الخاص بك</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>بناء جمهور</h3>
+                    <p>بناء قاعدة جماهيرية مستهدفة مهتمة بخدماتك ومنتجاتك</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-funnel-dollar"></i>
+                    <h3>تحويل فعال</h3>
+                    <p>تحويل المتابعين إلى عملاء حقيقيين من خلال استراتيجية محتوى فعالة</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-check"></i>
+                    <h3>متابعة شخصية</h3>
+                    <p>متابعة يومية ومراجعة مستمرة للمحتوى قبل النشر</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>أفكار إبداعية</h3>
+                    <p>الحصول على ملف يحتوي على 50 فكرة لقوالب محتوى متميز</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Stages Section -->
+    <section id="stages" class="instructor">
+        <div class="container">
+            <h2 class="section-title">مراحل البرنامج</h2>
+            <div class="program-stages">
+                <div class="stage-timeline">
+                    <div class="stage-item">
+                        <div class="stage-number">1</div>
+                        <div class="stage-content">
+                            <h3>المرحلة الأولى</h3>
+                            <p>فهم المنصة وخوارزمياتها</p>
+                            <p class="stage-meeting">ميتينج الأسبوع الأول</p>
+                        </div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">2</div>
+                        <div class="stage-content">
+                            <h3>المرحلة الثانية</h3>
+                            <p>بناء حساب احترافي ووضع الاستراتيجية</p>
+                            <p class="stage-meeting">ميتينج الأسبوع الثاني</p>
+                        </div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">3</div>
+                        <div class="stage-content">
+                            <h3>المرحلة الثالثة</h3>
+                            <p>وضع خطة المحتوى</p>
+                            <p class="stage-meeting">ميتينج بعد الأسبوع الثالث</p>
+                        </div>
+                    </div>
+                    <div class="stage-item">
+                        <div class="stage-number">4</div>
+                        <div class="stage-content">
+                            <h3>المرحلة الرابعة</h3>
+                            <p>بناء نظام تدفق الجمهور وتحويلهم لعملاء</p>
+                            <p class="stage-meeting">ميتينج الأسبوع الرابع وميتينج نهاية الأسبوع السادس</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="program-goal">
+                    <h3 class="goal-heading">الهدف الرئيسي</h3>
+                    <p class="goal-description">بناء نظام متكامل لحسابك يضمن تحقيق نتائج مستمرة ومستدامة 💰</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">النتائج السابقة</h2>
+            <div class="results-container">
+                <div class="results-gallery-slider">
+                    <div class="gallery-slider" id="gallerySlider">
+                        <div class="gallery-slide active">
+                            <img src="images/reviews/image1.jpg" alt="نتائج سابقة - شهادة عميل 1">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image2.jpg" alt="نتائج سابقة - شهادة عميل 2">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image3.jpg" alt="نتائج سابقة - شهادة عميل 3">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image4.jpg" alt="نتائج سابقة - شهادة عميل 4">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image5.jpg" alt="نتائج سابقة - شهادة عميل 5">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image6.jpg" alt="نتائج سابقة - شهادة عميل 6">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image7.jpg" alt="نتائج سابقة - شهادة عميل 7">
+                        </div>
+                        <div class="gallery-slide">
+                            <img src="images/reviews/image8.jpg" alt="نتائج سابقة - شهادة عميل 8">
+                        </div>
+                    </div>
+                    <div class="slider-controls">
+                        <button id="galleryPrevBtn" class="slider-btn"><i class="fas fa-chevron-right"></i></button>
+                        <div class="slider-dots" id="gallerySliderDots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                        <button id="galleryNextBtn" class="slider-btn"><i class="fas fa-chevron-left"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>ابدأ في بناء حسابك الاحترافي على منصة X اليوم</h2>
+            <p>احجز الآن واحصل على ملف 50 فكرة لقوالب محتوى مجانًا</p>
+            <a href="https://wa.me/+201064854501" class="btn btn-primary">احجز الآن</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">احجز الآن</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div class="booking-info">
+                        <h3>لتأكيد الحجز</h3>
+                        <p>ابعت كلمة Mentor X على الواتساب 👇</p>
+                        <div class="info-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <p><a href="https://wa.me/+201064854501" class="whatsapp-link">+201064854501</a></p>
+                        </div>
+                    </div>
+                    <div class="gift-info">
+                        <h3>الهدايا 🎁</h3>
+                        <p>ملف ٥٠ فكرة لقوالب محتوى</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 X Mentor. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/+201064854501" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

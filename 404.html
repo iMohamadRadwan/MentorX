@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - الصفحة غير موجودة | X Mentor</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .error-container {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+        
+        .error-message {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+        }
+        
+        .error-description {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            color: #666;
+        }
+        
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>X Mentor</h1>
+            </div>
+            <nav class="nav">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-list" id="navList">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="index.html#program-details">تفاصيل البرنامج</a></li>
+                    <li><a href="index.html#features">المميزات</a></li>
+                    <li><a href="index.html#stages">مراحل البرنامج</a></li>
+                    <li><a href="index.html#testimonials">النتائج السابقة</a></li>
+                    <li><a href="index.html#contact">احجز الآن</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Error Section -->
+    <section class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-message">الصفحة غير موجودة</h1>
+        <p class="error-description">عذراً، الصفحة التي تبحث عنها غير موجودة أو تم نقلها أو حذفها.</p>
+        <div class="error-actions">
+            <a href="index.html" class="btn btn-primary">العودة للصفحة الرئيسية</a>
+            <a href="index.html#contact" class="btn btn-secondary">تواصل معنا</a>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2023 X Mentor. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/+201064854501" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+</body>
+</html>

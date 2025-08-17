@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: https://xmentor.example.com/sitemap.xml
+
+Disallow: /404.html
