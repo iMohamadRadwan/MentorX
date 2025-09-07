@@ -118,12 +118,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const dots = document.querySelectorAll('.dot');
     let currentSlide = 0;
     let slideInterval;
+    let isTransitioning = false;
 
-    // Function to show specific slide
+    // Function to show specific slide with smooth transition
     function showSlide(index) {
-        // Hide all slides
-        slides.forEach(slide => {
+        if (isTransitioning) return;
+        
+        isTransitioning = true;
+        
+        // Ensure index is within bounds
+        if (index >= slides.length) index = 0;
+        if (index < 0) index = slides.length - 1;
+        
+        // Hide all slides with fade out effect
+        slides.forEach((slide, i) => {
             slide.classList.remove('active');
+            slide.style.zIndex = i === index ? '2' : '1';
         });
         
         // Remove active class from all dots
@@ -131,61 +141,204 @@ document.addEventListener('DOMContentLoaded', function() {
             dot.classList.remove('active');
         });
         
-        // Show current slide and activate corresponding dot
-        if (slides[index]) {
-            slides[index].classList.add('active');
-        }
-        if (dots[index]) {
-            dots[index].classList.add('active');
-        }
-        
-        currentSlide = index;
+        // Show current slide with fade in effect
+        setTimeout(() => {
+            if (slides[index]) {
+                slides[index].classList.add('active');
+            }
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
+            
+            currentSlide = index;
+            
+            // Allow next transition after animation completes
+            setTimeout(() => {
+                isTransitioning = false;
+            }, 800); // Match CSS transition duration
+        }, 50);
     }
 
     // Function to go to next slide
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        if (isTransitioning) return;
+        const nextIndex = (currentSlide + 1) % slides.length;
+        showSlide(nextIndex);
     }
 
-    // Function to start auto-play
+    // Function to go to previous slide
+    function prevSlide() {
+        if (isTransitioning) return;
+        const prevIndex = currentSlide === 0 ? slides.length - 1 : currentSlide - 1;
+        showSlide(prevIndex);
+    }
+
+    // Function to start auto-play with longer duration for better viewing
     function startAutoPlay() {
-        slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        slideInterval = setInterval(nextSlide, 4000); // Change slide every 4 seconds
     }
 
     // Function to stop auto-play
     function stopAutoPlay() {
-        clearInterval(slideInterval);
+        if (slideInterval) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        }
     }
 
     // Add click event listeners to dots
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
-            showSlide(index);
-            stopAutoPlay();
-            // Restart auto-play with consistent timing
-            setTimeout(() => {
-                startAutoPlay();
-            }, 5000); // Wait 5 seconds before restarting auto-play
+        dot.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (currentSlide !== index && !isTransitioning) {
+                stopAutoPlay();
+                showSlide(index);
+                // Restart auto-play after user interaction
+                setTimeout(() => {
+                    startAutoPlay();
+                }, 6000); // Wait 6 seconds before restarting auto-play
+            }
         });
     });
 
-    // Pause auto-play on hover
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            stopAutoPlay();
+            prevSlide();
+            setTimeout(startAutoPlay, 6000);
+        } else if (e.key === 'ArrowRight') {
+            stopAutoPlay();
+            nextSlide();
+            setTimeout(startAutoPlay, 6000);
+        }
+    });
+
+    // Pause auto-play on hover with better timing
     const sliderContainer = document.querySelector('.testimonials-slider');
     if (sliderContainer) {
-        sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+        sliderContainer.addEventListener('mouseenter', () => {
+            stopAutoPlay();
+        });
+        
         sliderContainer.addEventListener('mouseleave', () => {
-            // Restart auto-play with consistent timing after hover
+            // Restart auto-play after mouse leaves
             setTimeout(() => {
-                startAutoPlay();
-            }, 5000); // Wait 5 seconds before restarting auto-play
+                if (!slideInterval) {
+                    startAutoPlay();
+                }
+            }, 1000); // Wait 1 second before restarting
         });
     }
 
-    // Initialize slider
+    // Touch/Swipe functionality for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+    const minSwipeDistance = 50;
+    
+    if (sliderContainer) {
+        // Touch start
+        sliderContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+            stopAutoPlay();
+        }, { passive: true });
+        
+        // Touch end
+        sliderContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        }, { passive: true });
+        
+        // Mouse events for desktop drag
+        let mouseStartX = 0;
+        let isDragging = false;
+        
+        sliderContainer.addEventListener('mousedown', (e) => {
+            mouseStartX = e.clientX;
+            isDragging = true;
+            stopAutoPlay();
+            sliderContainer.style.cursor = 'grabbing';
+        });
+        
+        sliderContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        });
+        
+        sliderContainer.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            sliderContainer.style.cursor = 'grab';
+            
+            const mouseEndX = e.clientX;
+            const deltaX = mouseStartX - mouseEndX;
+            
+            if (Math.abs(deltaX) > minSwipeDistance) {
+                if (deltaX > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+            
+            setTimeout(() => {
+                if (!slideInterval) {
+                    startAutoPlay();
+                }
+            }, 3000);
+        });
+        
+        sliderContainer.addEventListener('mouseleave', () => {
+            if (isDragging) {
+                isDragging = false;
+                sliderContainer.style.cursor = 'grab';
+            }
+        });
+        
+        // Set cursor style
+        sliderContainer.style.cursor = 'grab';
+    }
+    
+    function handleSwipe() {
+        const deltaX = touchStartX - touchEndX;
+        const deltaY = touchStartY - touchEndY;
+        
+        // Check if it's a horizontal swipe (not vertical scroll)
+        if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+            if (deltaX > 0) {
+                // Swipe left - next slide
+                nextSlide();
+            } else {
+                // Swipe right - previous slide
+                prevSlide();
+            }
+        }
+        
+        // Restart auto-play after swipe
+        setTimeout(() => {
+            if (!slideInterval) {
+                startAutoPlay();
+            }
+        }, 3000);
+    }
+
+    // Initialize slider with proper setup
     if (slides.length > 0) {
-        showSlide(0);
-        startAutoPlay();
+        // Ensure all slides are hidden initially
+        slides.forEach((slide, index) => {
+            slide.classList.remove('active');
+            slide.style.zIndex = index === 0 ? '2' : '1';
+        });
+        
+        // Show first slide
+        setTimeout(() => {
+            showSlide(0);
+            startAutoPlay();
+        }, 100);
     }
     
     // No form submission code needed as forms have been removed
@@ -208,6 +361,106 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
         });
+    });
+    
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    const reviewImages = document.querySelectorAll('.review-image');
+    
+    let currentImageIndex = 0;
+    let isZoomed = false;
+    
+    // Open lightbox when clicking on review images
+    reviewImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            currentImageIndex = index;
+            openLightbox(img.src, img.alt);
+        });
+    });
+    
+    function openLightbox(src, alt) {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        isZoomed = false;
+        lightboxImage.classList.remove('zoomed');
+    }
+    
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        isZoomed = false;
+        lightboxImage.classList.remove('zoomed');
+    }
+    
+    // Close lightbox events
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+    
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+    
+    // Zoom functionality
+    if (lightboxImage) {
+        lightboxImage.addEventListener('click', () => {
+            isZoomed = !isZoomed;
+            lightboxImage.classList.toggle('zoomed', isZoomed);
+        });
+    }
+    
+    // Navigation functionality
+    if (lightboxPrev) {
+        lightboxPrev.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + reviewImages.length) % reviewImages.length;
+            const prevImg = reviewImages[currentImageIndex];
+            lightboxImage.src = prevImg.src;
+            lightboxImage.alt = prevImg.alt;
+            isZoomed = false;
+            lightboxImage.classList.remove('zoomed');
+        });
+    }
+    
+    if (lightboxNext) {
+        lightboxNext.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % reviewImages.length;
+            const nextImg = reviewImages[currentImageIndex];
+            lightboxImage.src = nextImg.src;
+            lightboxImage.alt = nextImg.alt;
+            isZoomed = false;
+            lightboxImage.classList.remove('zoomed');
+        });
+    }
+    
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                if (lightboxPrev) lightboxPrev.click();
+                break;
+            case 'ArrowRight':
+                if (lightboxNext) lightboxNext.click();
+                break;
+            case ' ':
+                e.preventDefault();
+                if (lightboxImage) lightboxImage.click();
+                break;
+        }
     });
     
     // Add active class to nav links based on scroll position
