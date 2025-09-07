@@ -112,64 +112,80 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Gallery Slider
-    const gallerySlides = document.querySelectorAll('.gallery-slide');
-    const galleryDots = document.querySelectorAll('#gallerySliderDots .dot');
-    const galleryPrevBtn = document.getElementById('galleryPrevBtn');
-    const galleryNextBtn = document.getElementById('galleryNextBtn');
-    let currentGallerySlide = 0;
-    
-    // Function to show a specific gallery slide
-    function showGallerySlide(index) {
+    // Testimonials Slider Functionality
+    const slider = document.querySelector('.slider-wrapper');
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentSlide = 0;
+    let slideInterval;
+
+    // Function to show specific slide
+    function showSlide(index) {
         // Hide all slides
-        gallerySlides.forEach(slide => {
+        slides.forEach(slide => {
             slide.classList.remove('active');
         });
         
         // Remove active class from all dots
-        galleryDots.forEach(dot => {
+        dots.forEach(dot => {
             dot.classList.remove('active');
         });
         
-        // Show the current slide and activate corresponding dot
-        gallerySlides[index].classList.add('active');
-        galleryDots[index].classList.add('active');
+        // Show current slide and activate corresponding dot
+        if (slides[index]) {
+            slides[index].classList.add('active');
+        }
+        if (dots[index]) {
+            dots[index].classList.add('active');
+        }
         
-        // Update current slide index
-        currentGallerySlide = index;
+        currentSlide = index;
     }
-    
-    // Initialize gallery slider
-    if (gallerySlides.length > 0) {
-        showGallerySlide(0);
-        
-        // Event listeners for next and previous buttons
-        if (galleryNextBtn) {
-            galleryNextBtn.addEventListener('click', function() {
-                currentGallerySlide = (currentGallerySlide + 1) % gallerySlides.length;
-                showGallerySlide(currentGallerySlide);
-            });
-        }
-        
-        if (galleryPrevBtn) {
-            galleryPrevBtn.addEventListener('click', function() {
-                currentGallerySlide = (currentGallerySlide - 1 + gallerySlides.length) % gallerySlides.length;
-                showGallerySlide(currentGallerySlide);
-            });
-        }
-        
-        // Event listeners for dots
-        galleryDots.forEach((dot, index) => {
-            dot.addEventListener('click', function() {
-                showGallerySlide(index);
-            });
+
+    // Function to go to next slide
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    // Function to start auto-play
+    function startAutoPlay() {
+        slideInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    }
+
+    // Function to stop auto-play
+    function stopAutoPlay() {
+        clearInterval(slideInterval);
+    }
+
+    // Add click event listeners to dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            showSlide(index);
+            stopAutoPlay();
+            // Restart auto-play with consistent timing
+            setTimeout(() => {
+                startAutoPlay();
+            }, 5000); // Wait 5 seconds before restarting auto-play
         });
-        
-        // Auto slide every 4 seconds
-        setInterval(function() {
-            currentGallerySlide = (currentGallerySlide + 1) % gallerySlides.length;
-            showGallerySlide(currentGallerySlide);
-        }, 4000);
+    });
+
+    // Pause auto-play on hover
+    const sliderContainer = document.querySelector('.testimonials-slider');
+    if (sliderContainer) {
+        sliderContainer.addEventListener('mouseenter', stopAutoPlay);
+        sliderContainer.addEventListener('mouseleave', () => {
+            // Restart auto-play with consistent timing after hover
+            setTimeout(() => {
+                startAutoPlay();
+            }, 5000); // Wait 5 seconds before restarting auto-play
+        });
+    }
+
+    // Initialize slider
+    if (slides.length > 0) {
+        showSlide(0);
+        startAutoPlay();
     }
     
     // No form submission code needed as forms have been removed
