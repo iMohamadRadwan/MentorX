@@ -288,17 +288,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     function openLightbox(src, alt) {
+        // Calculate scrollbar width to prevent page width changes
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        
         lightboxImage.src = src;
         lightboxImage.alt = alt;
         lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
+        
+        // Prevent body scroll while maintaining page width
+        document.body.classList.add('lightbox-open');
+        document.body.style.overflowY = 'hidden';
+        document.body.style.paddingRight = scrollbarWidth + 'px';
+        
         isZoomed = false;
         lightboxImage.classList.remove('zoomed');
     }
     
     function closeLightbox() {
         lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
+        
+        // Restore body scroll and remove padding
+        document.body.classList.remove('lightbox-open');
+        document.body.style.overflowY = '';
+        document.body.style.paddingRight = '';
+        
         isZoomed = false;
         lightboxImage.classList.remove('zoomed');
     }
